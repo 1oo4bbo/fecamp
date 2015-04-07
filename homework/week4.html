@@ -21,17 +21,50 @@
 	//   1. 숫자 세 자리와 '-' 그리고 숫자 세 자리로만 구성된다.
 	//   2. 가장 처음 숫자는 0이 될 수 없다. 예) 011-023 (x), 101-023 (o)
 	// 사용예:
-	//   isZipCode('200-333) // true 반환
+	//   isZipCode('200-333') // true 반환
 	//   isZipCode('200-33') // false 반환
-
+        
+        
+        function isZipCode(zipcode){
+            var regex = /^[1-9][0-9]{2}-[0-9]{3}$/;
+            return regex.test(zipcode);
+        }
+        
 	// 문제2: 인수로 전달한 아이디를 가진 입력 폼에 "성공!"이라는 문자열을 출력하는 성공() 함수를 작성하라.
 	// 사용예:
 	//    성공('text1');
+        
+        
+        function 성공(id){
+            var elms = document.querySelector('#' + id);
+            elms.value ='성공!';
+        }
+        
+        
+        
 
 	// 문제3: jQuery를 사용해 아이디가 box인 엘리먼트에 이벤트 리스너를 추가하라.
 	// 단, 상자는 그냥 클릭하면 오른쪽으로 10픽셀 이동하고 Alt 키를 누른채 클릭하면 왼쪽으로 10픽셀 이동해야 한다.
 	// 힌트1: 이벤트 객체의 altKey 프로퍼티를 사용하면 Alt 키가 눌렸는지 확인할 수 있습니다.
 	// 힌트2: 문자열을 숫자로 변환하는 과정이 필요할 것입니다.
+        
+        jQuery(function($){
+            $('#box').on('click',function(event){
+                var $this = $(this); // $(this);는 당하는 #box를 의미합니다. var $this에 넣어서 변하게 씁니다.
+                var boxLeft = $this.css('left'); 
+                // $(this).css('left')속성으로, on Click이벤트를 했을 때 값을 boxLeft변수에 넣습니다.
+                boxLeft = parseInt(boxLeft);  // boxLeft변수가 문자열로 받아졌으므로 숫자로 변환합니다.
+                
+                if(event.altKey){  //만약에 altKey를 눌렀다면, boxLeft값을 -10만큼 빼줍니다.
+                    boxLeft -= 10;
+                }else{  //altKey를 눌르지 않았다면 boxLeft값을 10만큼 더해줍니다.
+                    boxLeft += 10;
+                }
+                
+                $this.css('left', boxLeft + 'px');  //if나 else로 계산된 값을 대입합니다. 
+            });
+        });
+        
 	</script>
 </head>
 <body>
